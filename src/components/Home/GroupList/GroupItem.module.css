@@ -1,0 +1,12 @@
+.item {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+    padding: 1em;
+}
+
+.item:hover {
+    border: cornflowerblue solid 1px;
+}
