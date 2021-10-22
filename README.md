@@ -1,3 +1,4 @@
-#GDeck Front End 
+# GDeck Front End 
 
+## Technologies used
 ReactJS
