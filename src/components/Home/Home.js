@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from 'react-router-dom';
 
 import Card from "../UI/Card/Card";
 import Button from "../UI/Button/Button";
@@ -26,8 +27,8 @@ const Home = (props) => {
       {!groupPageVisible && (
         <Card className={classes.home}>
           <h1>G-Deck Management Platform</h1>
-          <Button>Create a Group</Button>
-          <Button>Join a Group</Button>
+          <NavLink to='/new-group'>Create a Group</NavLink>
+          <NavLink to='/join'>Join a Group</NavLink>
           <GropList openGroupItem={showGroupPage} />
         </Card>
       )}

@@ -6,10 +6,10 @@ import { useRef, useState } from "react";
 const Disciplines = (props) => {
     const inputRef = useRef();
     const DUMMY_DISCIPLINES = [
-        { id: 1, name: "Mate", descr: "Matematica" },
-        { id: 2, name: "Romana", descr: "Romana" },
-        { id: 3, name: "Info", descr: "Informatica" },
-        { id: 4, name: "Engleza", descr: "Engleza" },
+        { id: 1, name: "Matematica" },
+        { id: 2, name: "Romana" },
+        { id: 3, name: "Informatica" },
+        { id: 4, name: "Engleza" },
     ];
 
     const [discl, setDiscl] = useState(DUMMY_DISCIPLINES);
@@ -18,7 +18,6 @@ const Disciplines = (props) => {
         setDiscl([...discl, {
             id: discl.length + 1,
             name: inputRef.current.value,
-            descr: 'ttest'
         }]);
         inputRef.current.value = '';
     }
@@ -44,14 +43,13 @@ const Disciplines = (props) => {
                         key={item.id}
                         id={item.id}
                         name={item.name}
-                        descr={item.descr}
                         removeItem={removeDiscl}
                     />
                 ))}
             </div>
             <div style={{border:"red solid 1px ", padding:"10px", position:"relative", float:"right"}}>
-                <Button>Ok</Button>
-                <Button>Inchide</Button>
+                <Button onClick={props.onClose}>Ok</Button>
+                <Button onClick={props.onClose}>Inchide</Button>
             </div>
         </Modal>
     );

@@ -1,12 +1,12 @@
 import Disciplines from "./Disciplines"
 import Button from "../../../UI/Button/Button"
+import classes from "./DisciplineItem.module.css"
 
 const DisciplineItem = (props) => {
     return (
-        <div style={{border:"red solid 2px", display:"inline-flex", width:"100%"}}>
-            <h2>{props.name}</h2>
-            <p>{props.descr}</p>
-            <button onClick={()=>props.removeItem(props.id)} style={{position:"relative", float:"right"}}>-</button>
+        <div id={classes.item}>
+            <h2 className={classes.title}>{props.name}</h2>
+            <button className={classes.button} onClick={()=>props.removeItem(props.id)}>-</button>
         </div>
     )
 }
