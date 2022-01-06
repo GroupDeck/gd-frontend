@@ -1,9 +1,12 @@
 import Modal from "../../../UI/Modal/Modal";
 import DisciplineItem from "./DisciplineItem";
 import Button from "../../../UI/Button/Button";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
+import DiscContext from "../../../../store/disc-context";
 
 const Disciplines = (props) => {
+    const discCtx = useContext(DiscContext)
+
     const inputRef = useRef();
     const DUMMY_DISCIPLINES = [
         { id: 1, name: "Matematica" },
@@ -12,18 +15,22 @@ const Disciplines = (props) => {
         { id: 4, name: "Engleza" },
     ];
 
-    const [discl, setDiscl] = useState(DUMMY_DISCIPLINES);
+    //const [discl, setDiscl] = useState(DUMMY_DISCIPLINES);
 
     const addDiscl = () => {
-        setDiscl([...discl, {
-            id: discl.length + 1,
-            name: inputRef.current.value,
-        }]);
+        console.log('add discl' + discCtx.items)
+        discCtx.addDisc({id: discCtx.items.length + 1,
+            name: inputRef.current.value,})
+        // setDiscl([...discl, {
+        //     id: discl.length + 1,
+        //     name: inputRef.current.value,
+        // }]);
         inputRef.current.value = '';
     }
 
     const removeDiscl = (id) => {
-        setDiscl(discl.filter(item => item.id !== id));
+        discCtx.removeDisc(id)
+       // setDiscl(discl.filter(item => item.id !== id));
     }
 
     return (
@@ -37,8 +44,8 @@ const Disciplines = (props) => {
                 <Button onClick={addDiscl}>Adauga</Button>
             </div>
             <div >
-                {discl.length === 0 && <p>Nu aveti nici o materia adaugata!</p>}
-                {discl.length !== 0 && discl.map((item) => (
+                {discCtx.items.length === 0 && <p>Nu aveti nici o materia adaugata!</p>}
+                {discCtx.items.length !== 0 && discCtx.items.map((item) => (
                     <DisciplineItem
                         key={item.id}
                         id={item.id}
