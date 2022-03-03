@@ -1,36 +1,24 @@
 import Modal from "../../../UI/Modal/Modal";
 import DisciplineItem from "./DisciplineItem";
 import Button from "../../../UI/Button/Button";
-import { useRef, useState, useContext } from "react";
+import { useRef, useContext } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import DiscContext from "../../../../store/disc-context";
 
 const Disciplines = (props) => {
     const discCtx = useContext(DiscContext)
-
     const inputRef = useRef();
-    const DUMMY_DISCIPLINES = [
-        { id: 1, name: "Matematica" },
-        { id: 2, name: "Romana" },
-        { id: 3, name: "Informatica" },
-        { id: 4, name: "Engleza" },
-    ];
-
-    //const [discl, setDiscl] = useState(DUMMY_DISCIPLINES);
 
     const addDiscl = () => {
-        console.log('add discl' + discCtx.items)
-        discCtx.addDisc({id: discCtx.items.length + 1,
-            name: inputRef.current.value,})
-        // setDiscl([...discl, {
-        //     id: discl.length + 1,
-        //     name: inputRef.current.value,
-        // }]);
+        if (inputRef.current.value.trim() == '') return;
+        discCtx.addDisc({id: uuidv4(),
+            name: inputRef.current.value,
+            color: '#' + Math.floor(Math.random()*16777215).toString(16)})
         inputRef.current.value = '';
     }
 
     const removeDiscl = (id) => {
         discCtx.removeDisc(id)
-       // setDiscl(discl.filter(item => item.id !== id));
     }
 
     return (
@@ -54,9 +42,8 @@ const Disciplines = (props) => {
                     />
                 ))}
             </div>
-            <div style={{border:"red solid 1px ", padding:"10px", position:"relative", float:"right"}}>
+            <div style={{padding:"10px", position:"relative", float:"right"}}>
                 <Button onClick={props.onClose}>Ok</Button>
-                <Button onClick={props.onClose}>Inchide</Button>
             </div>
         </Modal>
     );
